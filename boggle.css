@@ -27,19 +27,26 @@ body{
 }
 
 #board{
-	width:30rem;
+	width:25em;
 	margin: 0 auto;
 	margin-bottom:0.9em;
 	background:#398BD4;
 	border:4px solid #FFCA08;
-	padding:0.8rem;
+	padding:0.5rem;
+	display:flex;
+	flex-wrap: wrap;
+}
+
+#board .button-wrapper{
+	width:5rem;
+	height:5rem;
+	padding:0.4rem;
+	box-sizing:border-box;
 }
 
 #board button{
-	box-sizing: border-box;
-	margin:0.4rem;
-	width:5rem;
-	height:5rem;
+	width:100%;
+	height:100%;
 	display:inline-block;
 	background:white;
 	border-radius:5px;
@@ -63,10 +70,13 @@ body{
 	border:3px solid #FFCA08;
 	margin:0;
 	background:white;
+	text-align:left;
 }
 
 #history-display .totals td{
 	background: #ACCEEC;
+	font-weight:bold;
+	font-size:110%;
 }
 
 #history-display .word{

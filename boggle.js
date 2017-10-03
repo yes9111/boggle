@@ -75,7 +75,7 @@ class UIBoard{
 	
 	drawBoard(){
 		this.buttons.forEach(button => {
-			this.el.appendChild(button.el);
+			this.el.appendChild(button.wrapper);
 		});
 	}
 	
@@ -134,12 +134,16 @@ class LetterButton{
 		this.setDisabled = this.setDisabled.bind(this);
 		
 		this.value = face;
+		this.wrapper = document.createElement('div');
+		this.wrapper.classList.add('button-wrapper');
+
 		this.el = document.createElement('button');
 		this.el.value = face;
 		this.el.addEventListener('click', this.handleClick);
 		this.clickCb = cb;
 		this.el.innerHTML = face;
 		this.index = index;
+		this.wrapper.appendChild(this.el);
 	}
 	
 	handleClick(event){
