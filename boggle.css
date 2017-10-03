@@ -46,7 +46,7 @@ body{
 	box-shadow: -3px 3px 5px black;
 	font-size:1.5rem;
 	font-weight:bold;
-	transition: background 0.4s linear;
+	transition: background 0.2s ease;
 }
 
 #board button.disabled{
@@ -77,3 +77,7 @@ body{
 	width:5em;
 }
 
+#error{
+	color:darkred;
+	font-weight:bold;
+}

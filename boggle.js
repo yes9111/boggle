@@ -65,7 +65,6 @@ class Board{
 class UIBoard{
 	constructor(el, board, doAddCharacter, doRemoveCharacter){
 		this.onAddCharacter = this.onAddCharacter.bind(this);
-		
 		this.el = el;
 		this.buttons = board.characters.map((face, i) => new LetterButton(face, i, this.onAddCharacter));
 		this.drawBoard();
@@ -87,16 +86,24 @@ class UIBoard{
 				button.setDisabled(false);
 				this.selectedButtons = this.selectedButtons.slice(0, this.selectedButtons.length-1);
 				this.removeCharacter(button.value);
+				clearError();
+			}
+			else{
+				displayError('You can only undo your last move.');
 			}
 		}
 		else{
 			if(this.selectedButtons.length>0){
-				if(!this.isAdjacent(button, this.selectedButtons[this.selectedButtons.length-1])) return;
+				if(!this.isAdjacent(button, this.selectedButtons[this.selectedButtons.length-1])){
+					displayError('The next button needs to be adjacent to the last button selected');
+					return;
+				}
 			}
 			
 			this.addCharacter(button.value);
 			button.setDisabled(true);
 			this.selectedButtons.push(button);
+			clearError();
 		}
 	}
 	
@@ -173,14 +180,17 @@ class HistoryList{
 	}
 
 	addWord(word){
-		if(this.history.hasOwnProperty(word)) return;
+		if(this.history.hasOwnProperty(word)){
+			displayError('You have already submitted this word before.');
+			return false;
+		}
+
 		this.history[word] = true;
 		const wordScore = scoreWord(word);
 		const row = document.createElement('tr');
 		const wordDisplay = document.createElement('td');
 		wordDisplay.innerHTML = word;
 		const scoreDisplay = document.createElement('td');
-		console.log(wordScore);
 		scoreDisplay.innerHTML = wordScore.toString(); // fix this
 		row.appendChild(wordDisplay);
 		row.appendChild(scoreDisplay);
@@ -188,6 +198,7 @@ class HistoryList{
 		this.el.insertBefore(row, this.totals);
 		this.scoreTotal += wordScore;
 		this.totalScoreDisplay.innerHTML = this.scoreTotal.toString();
+		return true;
 	}
 }
 
@@ -228,13 +239,25 @@ class Game{
 	}
 
 	submitWord(){
-		if(this.word === '') return;
-		this.history.addWord(this.word);
+		if(this.word === ''){ 
+			displayError('You cannot submit empty words.');
+			return;
+		}
+		if(!this.history.addWord(this.word)) return;
 		this.wordDisplay.clear();
 		this.word = '';
 		this.uiBoard.reset();
+		clearError();
 	}
 	
+}
+
+function displayError(msg){
+	document.querySelector('#error').innerHTML = msg;
+}
+
+function clearError(){
+	document.querySelector('#error').innerHTML = '';
 }
 
 window.addEventListener('load', function(){
