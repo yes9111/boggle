@@ -1,0 +1,79 @@
+body{
+	width:27em;
+	margin:0 auto;
+	background: #F57921;
+	font-family: arial, 'Sans';
+}
+
+#logo{
+	margin:0 auto;
+	display:block;
+}
+
+#line-wrapper{
+	display:flex;
+	justify-content: space-between;
+	width:100%;
+}
+
+#word-display{
+	font-size:1.15rem;
+}
+
+#line-wrapper #submit{
+	border-radius:5px;
+	background:white;
+	border:1px solid black;
+}
+
+#board{
+	width:30rem;
+	margin: 0 auto;
+	margin-bottom:0.9em;
+	background:#398BD4;
+	border:4px solid #FFCA08;
+	padding:0.8rem;
+}
+
+#board button{
+	box-sizing: border-box;
+	margin:0.4rem;
+	width:5rem;
+	height:5rem;
+	display:inline-block;
+	background:white;
+	border-radius:5px;
+	box-shadow: -3px 3px 5px black;
+	font-size:1.5rem;
+	font-weight:bold;
+	transition: background 0.4s linear;
+}
+
+#board button.disabled{
+	background:#ACCEEC;
+	color:black;
+}
+
+#history-display{
+	margin-top:1em;
+	border-spacing:0;
+}
+
+#history-display th, #history-display td{
+	border:3px solid #FFCA08;
+	margin:0;
+	background:white;
+}
+
+#history-display .totals td{
+	background: #ACCEEC;
+}
+
+#history-display .word{
+	width:13em;
+}
+
+#history-display .score{
+	width:5em;
+}
+
